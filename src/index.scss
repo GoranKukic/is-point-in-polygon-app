@@ -1,0 +1,133 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.app {
+  background-image: linear-gradient(to left, #553c9a, #b393d3);
+  color: transparent;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  //justify-content: center;
+  align-items: center;
+  padding: 20px 40px;
+}
+
+h1 {
+  font-size: 70px;
+  font-weight: 600;
+  color: white;
+  margin: 0 auto;
+  //padding: 0 40px;
+  text-align: center;
+}
+p {
+  color: white;
+  margin: 0;
+}
+
+.start-form {
+  margin-top: 20px;
+  padding: 20px;
+  border: 1px solid white;
+  border-radius: 14px;
+
+  color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.btn {
+  border: 1px solid white;
+  border-radius: 14px;
+  margin: 0 auto;
+  width: fit-content;
+  color: #553c9a;
+  cursor: pointer;
+  box-sizing: border-box;
+
+  &:active {
+    // border: 1px solid #553c9a;
+    color: white;
+    background-color: #553c9a;
+  }
+}
+
+.coordinates {
+  border: 1px solid white;
+  border-radius: 14px;
+  margin-top: 20px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.coordinates-wrap {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.angle-wrapper {
+  max-width: 50%;
+  width: 100%;
+  border-right: 1px solid white;
+  text-align: center;
+}
+
+.angle-coordinates {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  max-width: 100px;
+  max-width: 50%;
+  width: 100%;
+}
+
+.point-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 50%;
+  width: 100%;
+}
+
+.point-coordinates {
+  display: flex;
+  flex-direction: column;
+  color: white;
+  gap: 5px;
+  text-align: center;
+}
+
+.angle-inner {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.angle-input {
+  max-width: 50%;
+  width: 100%;
+  margin-top: 10px;
+  gap: 5px;
+}
+
+.btn-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 20px;
+}
