@@ -8,6 +8,7 @@ function App() {
   // const inputRefPointY = useRef(null);
 
   const [fieldsCount, setFieldsCount] = useState(0);
+  let [result, setResult] = useState('');
 
   const [xPolygonInput, setXInput] = useState(0);
   const [yPolygonInput, setYInput] = useState(0);
@@ -19,15 +20,69 @@ function App() {
 
   // Angle point coordinates
   var anglePoints = [
-    { x: 20, y: 10 },
-    { x: 70, y: 150 },
-    { x: 110, y: 80 },
+    { x: 50, y: 10 },
+    { x: 370, y: 150 },
+    { x: 110, y: 220 },
     { x: 180, y: 170 },
-    { x: 150, y: 170 },
+    { x: 150, y: 370 },
   ];
 
+  // FINAL FUNCTION
+
   var pointCoordinates = [Number(xPointInput), Number(yPointInput)];
-  var polygonCoordinates = [];
+  var polygonCoordinates = [
+    [50, 10],
+    [370, 150],
+    [110, 220],
+    [180, 170],
+    [150, 370],
+  ];
+  var check = () => {
+    let n = polygonCoordinates.length; // number of polygon points (angles)
+    let count = 0; // number of intersections
+    let x = pointCoordinates[0]; // x coordinate of point
+    let y = pointCoordinates[1]; // y coordinate of point
+
+    console.log(polygonCoordinates.length);
+
+    for (let i = 0; i < n - 1; i++) {
+      //looping thrught each side of polygon
+      let side = {
+        // side is made of two points
+        a: {
+          x: polygonCoordinates[i][0],
+          y: polygonCoordinates[i][1],
+        },
+        b: {
+          x: polygonCoordinates[i + 1][0],
+          y: polygonCoordinates[i + 1][1],
+        },
+      };
+      let x1 = side.a.x,
+        x2 = side.b.x,
+        y1 = side.a.y,
+        y2 = side.b.y;
+      // if point is bewteen a and be in verical axis
+      // and is less than intersection point in orizontal axis
+      // eslint-disable-next-line
+      if (y < y1 !== y < y2 && x < ((x2 - x1) * (y - y1)) / (y2 - y1) + x1) {
+        // then we can count it as intersection
+        count += 1;
+      }
+    }
+    console.log(count);
+    // if our count is odd number point is inside of polygon, else is outside
+
+    if (count % 2 === 0) {
+      result = 'YES';
+    } else {
+      result = 'NOPE';
+    }
+
+    console.log(result);
+
+    return count % 2 === 0 ? false : true;
+  };
 
   var items = [];
 
@@ -152,9 +207,12 @@ function App() {
         </div>
 
         <div className="btn-wrapper">
-          <button className="btn">Check is point inide or not</button>
+          <button onClick={check} className="btn">
+            Check is point inide or not
+          </button>
         </div>
       </div>
+      <h1>{result}</h1>
       <div className="canvas-wrapper">
         <Canvas draw={draw} />
       </div>
