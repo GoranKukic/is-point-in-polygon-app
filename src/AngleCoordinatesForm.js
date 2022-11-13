@@ -1,4 +1,6 @@
-function SecondForm() {
+function SecondForm({ xPolygonInput, yPolygonInput, setXInput, setYInput }) {
+  // const [input, setInput] = useState(props?.value ?? '');
+
   return (
     <div className="angle-input">
       <form>
@@ -7,21 +9,27 @@ function SecondForm() {
           <p>Angle</p>
           <input
             type="number"
+            min="0"
+            max="500"
             placeholder="x"
-            id="nr-of-angles"
+            className="xPolygon"
             name="nr-ofangles"
+            value={xPolygonInput}
+            onChange={(e) => setXInput(e.target.value)}
             required
           ></input>
           <input
             type="number"
+            min="0"
+            max="400"
             placeholder="y"
-            id="nr-of-angles"
+            className="yPolygon"
             name="nr-ofangles"
+            onChange={(e) => setYInput(e.target.value)}
+            value={yPolygonInput}
             required
           ></input>
         </div>
-
-        {/* <button className="btn">Sumbit</button> */}
       </form>
     </div>
   );
