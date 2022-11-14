@@ -4,62 +4,17 @@ import Canvas from './CanvasHook';
 
 function App() {
   const inputRef = useRef(null);
-  // const inputRefPointX = useRef(null);
-  // const inputRefPointY = useRef(null);
-
   const [positions, setPositions] = useState([]);
-
-  const [fieldsCount, setFieldsCount] = useState(0);
   let [result, setResult] = useState('');
+  const [xPointInput, setPointXInput] = useState(0);
+  const [yPointInput, setPointYInput] = useState(0);
 
   // const [xPolygonInput, setXInput] = useState(0);
   // const [yPolygonInput, setYInput] = useState(0);
 
-  const [xPointInput, setPointXInput] = useState(0);
-  const [yPointInput, setPointYInput] = useState(0);
-
   //  vvvvvv Canvas vvvvvv
 
-  // Angle point coordinates
-  // var anglePoints = [
-  //   { x: 50, y: 10 },
-  //   { x: 370, y: 150 },
-  //   { x: 110, y: 220 },
-  //   { x: 180, y: 170 },
-  //   { x: 150, y: 370 },
-  // ];
-
-  // var pointCoordinates = [Number(xPointInput), Number(yPointInput)];
-  // var polygonCoordinates = [];
-  // var polygonCoordinates = [
-  //   [50, 10],
-  //   [370, 150],
-  //   [110, 220],
-  //   [180, 170],
-  //   [150, 370],
-  // ];
-
-  // var items = [];
-
-  // let angleCoordinates = document.getElementsByClassName('angle-coordinates');
-  // var xPolygon = document.getElementsByClassName('.xPolygon');
-  // var yPolygon = document.getElementsByClassName('.yPolygon');
-
-  // console.log(angleCoordinates);
-
-  // let create = () => {
-  //   console.log(xPolygonInput, yPolygonInput);
-  //   items.push(
-  //     angleCoordinates.map(() => {
-  //       return {
-  //         x: { xPolygonInput },
-  //         y: { yPolygonInput },
-  //       };
-  //     })
-  //   );
-  //   console.log(items);
-  // };
-
+  //function for creating input fields for Polygon angle points
   const handleCreatePositions = () => {
     const pos = Array.from(
       { length: parseInt(inputRef.current.value, 10) },
@@ -68,9 +23,14 @@ function App() {
     setPositions(pos);
   };
 
+  // global variable where Polygon angle positions will be stored
+  var newPositions;
+
+  // function for handling data from input fields of Polygon angle points,
+  // and storing it in array of objects co canvas can use them to draw
   const handleOnInputChange = (e, index, axis) => {
     setPositions((prevPositions) => {
-      const newPositions = [...prevPositions];
+      newPositions = [...prevPositions];
       newPositions[index] = {
         ...newPositions[index],
         [axis]: e.target.value,
@@ -79,8 +39,8 @@ function App() {
     });
   };
 
+  //coordinates of point
   var pointCoordinates = [Number(xPointInput), Number(yPointInput)];
-  var polygonCoordinates = [];
 
   //Draw function
 
@@ -111,12 +71,19 @@ function App() {
 
   // FINAL FUNCTION
   var check = () => {
+    // coordinates of polygon angles converted to simple array instead array of objects
+    var polygonCoordinates = positions.map(({ x, y }) => [
+      Number(x),
+      Number(y),
+    ]);
+    //console.log('polygonCoordinates multi array: ', polygonCoordinates);
+
     let n = polygonCoordinates.length; // number of polygon points (angles)
     let count = 0; // number of intersections
     let x = pointCoordinates[0]; // x coordinate of point
     let y = pointCoordinates[1]; // y coordinate of point
 
-    console.log(polygonCoordinates.length);
+    //console.log('Polygon cooridinates length', polygonCoordinates.length);
 
     for (let i = 0; i < n - 1; i++) {
       //looping thrught each side of polygon
@@ -194,7 +161,10 @@ function App() {
                 </AngleCoordinatesForm>
               ))}
             </div>
-            <button onClick={() => console.log(positions)} className="btn">
+            <button
+              onClick={() => console.log('Plygon positions:', positions)}
+              className="btn"
+            >
               Create Array of Objects
             </button>
           </div>
@@ -205,10 +175,8 @@ function App() {
                 type="number"
                 min="0"
                 max="500"
-                // placeholder="x"
                 id="nr-of-angles-x"
                 name="nr-ofangles-x"
-                // ref={inputRefPointX}
                 value={xPointInput}
                 onChange={(e) => setPointXInput(e.target.value)}
               ></input>
@@ -219,7 +187,6 @@ function App() {
                 placeholder="y"
                 id="nr-of-angles-y"
                 name="nr-ofangles-y"
-                // ref={inputRefPointY}
                 value={yPointInput}
                 onChange={(e) => setPointYInput(e.target.value)}
               ></input>

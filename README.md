@@ -1,70 +1,35 @@
-# Getting Started with Create React App
+# Check is point inside of polygon or not - React app
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## The brief
 
-In the project directory, you can run:
+- Web app is builted with React, styled with SCSS preprocessor, drawing is done in Canvas.
+- App is responsive down to 500px of viewport width, because that is width oc Canvas.
 
-### `npm start`
+## Web app functionality:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- This App checks is point inside of polygon or not.
+- In first upper form you can enter number from 3 to 10 for desired points (angles) of Polygon.
+- In second form there are input fields for Polygon point - x and y axis. Default value is 0 for both x and y axis, but soon as you enter numeric values in input fields (from 0 to 500 for x, and form 0 to 400 for y axis), in Canvas field below you will se that Polygon is being created. Polygon has white background.
+- Third form is for point, it also have input fields for x and y axis from 0 to 500 for x, and form 0 to 400 for y axis). Point have black color.
+- By clicking on "Check is point inside or not" button check function is taking values  of Polygon points (angles), and values of Point coordinates. Algorithm in this function draws horizontal line from Point, and check how many times this line intersect Polygon borders (lines). If that number is even Point is inside of Polygon. This result is printed in console, and can also be seen on Front end.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Live Preview
 
-### `npm test`
+[See live here](https://gorankukic-dashboardapp.netlify.app/)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## What we have learned?
 
-### `npm run build`
+- To work with and manipulate Canvas inside of React.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Development requirements
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- [Node.js](http://nodejs.org/)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+To install dependencies run:
 
-### `npm run eject`
+`npm install`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+To start app run:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+`npm start`
