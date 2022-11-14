@@ -9,6 +9,8 @@ function App() {
   const [xPointInput, setPointXInput] = useState(0);
   const [yPointInput, setPointYInput] = useState(0);
 
+  //var result;
+
   // const [xPolygonInput, setXInput] = useState(0);
   // const [yPolygonInput, setYInput] = useState(0);
 
@@ -110,14 +112,16 @@ function App() {
         count += 1;
       }
     }
-    console.log(count);
+    //console.log("This is number of intersections", count);
     // if our count is odd number point is inside of polygon, else is outside
 
     if (count % 2 === 0) {
-      result = 'YES';
+      result = 'No, Point is outside of Polygon';
     } else {
-      result = 'NOPE';
+      result = 'Yes, Point is inside of Polygon';
     }
+
+    setResult(result);
 
     console.log(result);
 
@@ -161,12 +165,12 @@ function App() {
                 </AngleCoordinatesForm>
               ))}
             </div>
-            <button
+            {/* <button
               onClick={() => console.log('Plygon positions:', positions)}
               className="btn"
             >
-              Create Array of Objects
-            </button>
+              Console log Polygon positions
+            </button> */}
           </div>
           <div className="point-wrapper">
             <div className="point-coordinates">
