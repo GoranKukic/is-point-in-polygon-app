@@ -7,11 +7,13 @@ function App() {
   // const inputRefPointX = useRef(null);
   // const inputRefPointY = useRef(null);
 
+  const [positions, setPositions] = useState([]);
+
   const [fieldsCount, setFieldsCount] = useState(0);
   let [result, setResult] = useState('');
 
-  const [xPolygonInput, setXInput] = useState(0);
-  const [yPolygonInput, setYInput] = useState(0);
+  // const [xPolygonInput, setXInput] = useState(0);
+  // const [yPolygonInput, setYInput] = useState(0);
 
   const [xPointInput, setPointXInput] = useState(0);
   const [yPointInput, setPointYInput] = useState(0);
@@ -19,24 +21,95 @@ function App() {
   //  vvvvvv Canvas vvvvvv
 
   // Angle point coordinates
-  var anglePoints = [
-    { x: 50, y: 10 },
-    { x: 370, y: 150 },
-    { x: 110, y: 220 },
-    { x: 180, y: 170 },
-    { x: 150, y: 370 },
-  ];
+  // var anglePoints = [
+  //   { x: 50, y: 10 },
+  //   { x: 370, y: 150 },
+  //   { x: 110, y: 220 },
+  //   { x: 180, y: 170 },
+  //   { x: 150, y: 370 },
+  // ];
 
-  // FINAL FUNCTION
+  // var pointCoordinates = [Number(xPointInput), Number(yPointInput)];
+  // var polygonCoordinates = [];
+  // var polygonCoordinates = [
+  //   [50, 10],
+  //   [370, 150],
+  //   [110, 220],
+  //   [180, 170],
+  //   [150, 370],
+  // ];
+
+  // var items = [];
+
+  // let angleCoordinates = document.getElementsByClassName('angle-coordinates');
+  // var xPolygon = document.getElementsByClassName('.xPolygon');
+  // var yPolygon = document.getElementsByClassName('.yPolygon');
+
+  // console.log(angleCoordinates);
+
+  // let create = () => {
+  //   console.log(xPolygonInput, yPolygonInput);
+  //   items.push(
+  //     angleCoordinates.map(() => {
+  //       return {
+  //         x: { xPolygonInput },
+  //         y: { yPolygonInput },
+  //       };
+  //     })
+  //   );
+  //   console.log(items);
+  // };
+
+  const handleCreatePositions = () => {
+    const pos = Array.from(
+      { length: parseInt(inputRef.current.value, 10) },
+      () => ({ x: 0, y: 0 })
+    );
+    setPositions(pos);
+  };
+
+  const handleOnInputChange = (e, index, axis) => {
+    setPositions((prevPositions) => {
+      const newPositions = [...prevPositions];
+      newPositions[index] = {
+        ...newPositions[index],
+        [axis]: e.target.value,
+      };
+      return newPositions;
+    });
+  };
 
   var pointCoordinates = [Number(xPointInput), Number(yPointInput)];
-  var polygonCoordinates = [
-    [50, 10],
-    [370, 150],
-    [110, 220],
-    [180, 170],
-    [150, 370],
-  ];
+  var polygonCoordinates = [];
+
+  //Draw function
+
+  const draw = (ctx) => {
+    // Polygon
+    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+    ctx.fillStyle = 'white';
+
+    if (positions.length > 0) {
+      ctx.beginPath();
+      let point = positions[0];
+      ctx.moveTo(point.x, point.y); // point 1
+      for (let i = 1; i < positions.length; ++i) {
+        point = positions[i];
+        ctx.lineTo(point.x, point.y); // point from 2 up to (points.length - 1)
+      }
+      ctx.closePath(); // go back to point 1
+    }
+    ctx.fill();
+
+    // Point
+    ctx.beginPath();
+    ctx.arc(pointCoordinates[0], pointCoordinates[1], 1, 0, 2 * Math.PI, true);
+    ctx.stroke();
+  };
+
+  //  ^^^^^^ Canvas ^^^^^^
+
+  // FINAL FUNCTION
   var check = () => {
     let n = polygonCoordinates.length; // number of polygon points (angles)
     let count = 0; // number of intersections
@@ -84,54 +157,6 @@ function App() {
     return count % 2 === 0 ? false : true;
   };
 
-  var items = [];
-
-  let angleCoordinates = document.getElementsByClassName('.angle-coordinates');
-  // var xPolygon = document.getElementsByClassName('.xPolygon');
-  // var yPolygon = document.getElementsByClassName('.yPolygon');
-
-  console.log(angleCoordinates);
-
-  let create = () => {
-    console.log(xPolygonInput, yPolygonInput);
-    items.push(
-      angleCoordinates.map(() => {
-        return {
-          x: { xPolygonInput },
-          y: { yPolygonInput },
-        };
-      })
-    );
-    console.log(items);
-  };
-
-  //Draw function
-
-  const draw = (ctx) => {
-    // Polygon
-    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-    ctx.fillStyle = 'white';
-
-    if (anglePoints.length > 0) {
-      ctx.beginPath();
-      let point = anglePoints[0];
-      ctx.moveTo(point.x, point.y); // point 1
-      for (let i = 1; i < anglePoints.length; ++i) {
-        point = anglePoints[i];
-        ctx.lineTo(point.x, point.y); // point from 2 up to (points.length - 1)
-      }
-      ctx.closePath(); // go back to point 1
-    }
-    ctx.fill();
-
-    // Point
-    ctx.beginPath();
-    ctx.arc(pointCoordinates[0], pointCoordinates[1], 1, 0, 2 * Math.PI, true);
-    ctx.stroke();
-  };
-
-  //  ^^^^^^ Canvas ^^^^^^
-
   return (
     <div className="app">
       <h1>Check is point inide of polygon or not</h1>
@@ -146,10 +171,7 @@ function App() {
           required
           ref={inputRef}
         ></input>
-        <button
-          className="btn"
-          onClick={() => setFieldsCount(inputRef.current.value)}
-        >
+        <button className="btn" onClick={handleCreatePositions}>
           Submit
         </button>
       </div>
@@ -158,23 +180,22 @@ function App() {
           <div className="angle-wrapper">
             <p>Angle Coordinates</p>
             <div className="angle-inner">
-              {Array(parseInt(fieldsCount))
-                .fill()
-                .map((i, index) => (
-                  <AngleCoordinatesForm
-                    id={index}
-                    key={index}
-                    xPolygonInput={xPolygonInput}
-                    yPolygonInput={yPolygonInput}
-                    setXInput={setXInput}
-                    setYInput={setYInput}
-                  >
-                    {/* <p>{`Angle + ${index + 1}`}</p> */}
-                  </AngleCoordinatesForm>
-                ))}
+              {positions.map((position, index) => (
+                <AngleCoordinatesForm
+                  id={index}
+                  key={index}
+                  x={position.x}
+                  y={position.y}
+                  onXChange={(e) => handleOnInputChange(e, index, 'x')}
+                  onYChange={(e) => handleOnInputChange(e, index, 'y')}
+                  className="second-form"
+                >
+                  <p>Group {index + 1}</p>
+                </AngleCoordinatesForm>
+              ))}
             </div>
-            <button onClick={create} className="btn">
-              Create polygon
+            <button onClick={() => console.log(positions)} className="btn">
+              Create Array of Objects
             </button>
           </div>
           <div className="point-wrapper">

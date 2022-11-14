@@ -1,4 +1,4 @@
-function SecondForm({ xPolygonInput, yPolygonInput, setXInput, setYInput }) {
+function SecondForm({ x, y, onXChange, onYChange } ) {
   // const [input, setInput] = useState(props?.value ?? '');
 
   return (
@@ -14,8 +14,8 @@ function SecondForm({ xPolygonInput, yPolygonInput, setXInput, setYInput }) {
             placeholder="x"
             className="xPolygon"
             name="nr-ofangles"
-            value={xPolygonInput}
-            onChange={(e) => setXInput(e.target.value)}
+            value={x}
+            onChange={onXChange}
             required
           ></input>
           <input
@@ -25,8 +25,8 @@ function SecondForm({ xPolygonInput, yPolygonInput, setXInput, setYInput }) {
             placeholder="y"
             className="yPolygon"
             name="nr-ofangles"
-            onChange={(e) => setYInput(e.target.value)}
-            value={yPolygonInput}
+            value={y}
+            onChange={onYChange}
             required
           ></input>
         </div>
