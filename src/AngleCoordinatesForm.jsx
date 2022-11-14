@@ -1,12 +1,9 @@
-function SecondForm({ x, y, onXChange, onYChange } ) {
-  // const [input, setInput] = useState(props?.value ?? '');
-
+function SecondForm({ x, y, onXChange, onYChange, id }) {
   return (
     <div className="angle-input">
       <form>
-        {/* <label>Enter X and Y coordinates for Polygon angles</label> */}
         <div className="angle-coordinates">
-          <p>Angle</p>
+          <p>Angle {id + 1}</p>
           <input
             type="number"
             min="0"
@@ -17,7 +14,7 @@ function SecondForm({ x, y, onXChange, onYChange } ) {
             value={x}
             onChange={onXChange}
             required
-          ></input>
+          />
           <input
             type="number"
             min="0"
@@ -28,7 +25,7 @@ function SecondForm({ x, y, onXChange, onYChange } ) {
             value={y}
             onChange={onYChange}
             required
-          ></input>
+          />
         </div>
       </form>
     </div>

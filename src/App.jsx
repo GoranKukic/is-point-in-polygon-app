@@ -1,9 +1,11 @@
 import { useRef, useState } from 'react';
 import AngleCoordinatesForm from './AngleCoordinatesForm';
 import Canvas from './CanvasHook';
+import { useAutoAnimate } from '@formkit/auto-animate/react';
 
 function App() {
   const inputRef = useRef(null);
+  const [animationRef] = useAutoAnimate();
   const [positions, setPositions] = useState([]);
   let [result, setResult] = useState('');
   const [xPointInput, setPointXInput] = useState(0);
@@ -65,7 +67,7 @@ function App() {
 
     // Point
     ctx.beginPath();
-    ctx.arc(pointCoordinates[0], pointCoordinates[1], 1, 0, 2 * Math.PI, true);
+    ctx.arc(pointCoordinates[0], pointCoordinates[1], 2, 0, 2 * Math.PI, true);
     ctx.stroke();
   };
 
@@ -116,9 +118,9 @@ function App() {
     // if our count is odd number point is inside of polygon, else is outside
 
     if (count % 2 === 0) {
-      result = 'No, Point is outside of Polygon';
+      result = 'Point is outside of Polygon';
     } else {
-      result = 'Yes, Point is inside of Polygon';
+      result = 'Point is inside of Polygon';
     }
 
     setResult(result);
@@ -129,8 +131,8 @@ function App() {
   };
 
   return (
-    <div className="app">
-      <h1>Check is point inide of polygon or not</h1>
+    <div className="app area" ref={animationRef}>
+      <h1>Check is Point inside of Polygon or not</h1>
       <div className="start-form">
         <p>Select number from 3 to 10 for number of Polygon angles</p>
         <input
@@ -141,7 +143,7 @@ function App() {
           max="10"
           required
           ref={inputRef}
-        ></input>
+        />
         <button className="btn" onClick={handleCreatePositions}>
           Submit
         </button>
@@ -149,7 +151,7 @@ function App() {
       <div className="coordinates">
         <div className="coordinates-wrap">
           <div className="angle-wrapper">
-            <p>Angle Coordinates</p>
+            <p>Polygon Coordinates</p>
             <div className="angle-inner">
               {positions.map((position, index) => (
                 <AngleCoordinatesForm
@@ -160,9 +162,7 @@ function App() {
                   onXChange={(e) => handleOnInputChange(e, index, 'x')}
                   onYChange={(e) => handleOnInputChange(e, index, 'y')}
                   className="second-form"
-                >
-                  <p>Group {index + 1}</p>
-                </AngleCoordinatesForm>
+                />
               ))}
             </div>
             {/* <button
@@ -183,7 +183,7 @@ function App() {
                 name="nr-ofangles-x"
                 value={xPointInput}
                 onChange={(e) => setPointXInput(e.target.value)}
-              ></input>
+              />
               <input
                 type="number"
                 min="0"
@@ -193,20 +193,34 @@ function App() {
                 name="nr-ofangles-y"
                 value={yPointInput}
                 onChange={(e) => setPointYInput(e.target.value)}
-              ></input>
+              />
             </div>
           </div>
         </div>
 
         <div className="btn-wrapper">
           <button onClick={check} className="btn">
-            Check is point inide or not
+            Check
           </button>
         </div>
       </div>
-      <h1>{result}</h1>
-      <div className="canvas-wrapper">
-        <Canvas draw={draw} />
+      {result ? <h2> {result} </h2> : null}
+      <div className="bottom-wrap">
+        <div className="canvas-wrapper">
+          <Canvas draw={draw} />
+        </div>
+        <ul className="circles">
+          <li />
+          <li />
+          <li />
+          <li />
+          <li />
+          <li />
+          <li />
+          <li />
+          <li />
+          <li />
+        </ul>
       </div>
     </div>
   );

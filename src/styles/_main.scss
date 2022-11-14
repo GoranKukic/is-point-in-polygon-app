@@ -1,0 +1,214 @@
+@import url('https://fonts.googleapis.com/css?family=Exo:400,500,700');
+
+body {
+  margin: 0;
+  font-family: $base-font, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.app {
+  color: transparent;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 40px 0 40px;
+
+  @media only screen and (max-width: 768px) {
+    padding: 10px 10px 0 10px;
+  }
+}
+
+h1 {
+  font-size: 56px;
+  font-weight: 600;
+  color: $white;
+  margin: 0 auto;
+  text-align: center;
+  z-index: 1;
+
+  @media only screen and (max-width: 768px) {
+    font-size: 48px;
+  }
+
+  @media only screen and (max-width: 480px) {
+    font-size: 36px;
+  }
+}
+
+h2 {
+  font-size: 42px;
+  margin-top: 40px;
+  margin-bottom: 0;
+  color: $white;
+  z-index: 1;
+  text-align: center;
+
+  @media only screen and (max-width: 480px) {
+    font-size: 28px;
+  }
+}
+p {
+  color: $white;
+  margin: 0;
+  text-align: center;
+}
+
+.start-form {
+  margin-top: 40px;
+  padding: 20px;
+  border: 1px solid $white;
+  border-radius: 14px;
+  color: $white;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 1;
+
+  input {
+    max-width: 150px;
+    width: 100%;
+    align-self: center;
+  }
+}
+
+.btn {
+  max-width: 120px;
+  width: 100%;
+  height: 30px;
+  border-radius: 5px;
+  margin: 0 auto;
+  color: $white;
+  background-color: transparent;
+  border: 1px solid $white;
+  font-size: 12px;
+  font-family: 'Exo', sans-serif;
+  font-weight: 500;
+  line-height: 100%;
+  letter-spacing: 0.2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.2s;
+
+  &:hover {
+    background-color: $white;
+    color: $blue;
+    border: 1px solid $blue;
+    box-sizing: border-box;
+    cursor: pointer;
+  }
+
+  &:active {
+    font-weight: 700;
+  }
+}
+
+.coordinates {
+  border: 1px solid $white;
+  border-radius: 14px;
+  margin-top: 40px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  max-width: 900px;
+  width: 100%;
+  z-index: 1;
+
+  @media only screen and (max-width: 768px) {
+    max-width: 472px;
+  }
+}
+
+.coordinates-wrap {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.angle-wrapper {
+  max-width: 50%;
+  width: 100%;
+  border-right: 1px solid $white;
+  text-align: center;
+}
+
+.angle-coordinates {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  max-width: 100px;
+  max-width: 50%;
+  width: 100%;
+
+  p {
+    font-size: 12px;
+  }
+}
+
+.point-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 50%;
+  width: 100%;
+}
+
+.point-coordinates {
+  display: flex;
+  flex-direction: column;
+  color: $white;
+  gap: 5px;
+  text-align: center;
+}
+
+.angle-inner {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.angle-input {
+  max-width: 50%;
+  width: 100%;
+  margin-top: 10px;
+  gap: 5px;
+  animation: slide-down 300ms ease-out forwards;
+}
+
+.btn-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 20px;
+}
+
+.bottom-wrap {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.canvas-wrapper {
+  margin-top: 40px;
+  margin-bottom: 60px;
+  width: 500px;
+  border: 1px solid $white;
+  box-sizing: border-box;
+  z-index: 1;
+}
+
+@keyframes slide-down {
+  from {
+    opacity: 0;
+    transform: translateY(-3rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
