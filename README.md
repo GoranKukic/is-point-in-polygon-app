@@ -16,7 +16,7 @@
 
 ## Live Preview
 
-[See live here](https://gorankukic-dashboardapp.netlify.app/)
+[See live here](https://gorankukic-pointinpolygon.netlify.app/)
 
 ## What we have learned?
 
